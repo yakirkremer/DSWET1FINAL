@@ -26,22 +26,83 @@ public:
     int* groupViewsTmp;
     User(int Id, bool vip);
     virtual ~User(){
-        delete views;
+        delete[] views;
     }
         int genreNum(Genre genre)const;
 
-    const int getViews(Genre genre)const;
-    const int getViews(int genre)const;
+    int getGroupViews(int genre)const;
+
+     int getViews(Genre genre)const;
+     int getViews(int genre)const;
 
     int getGroupId()const;
     void setGroupId(int group, AvlTreeNew<User*>* Newgroup);
     void watch(Movie* movie);
     void rate(Movie* movie, int);
     void updateUserViews();
+    bool operator==(User* other)const;
 };
 
 
+class UsersTreeAbs:public AvlTreeNew<User*> {
+protected:
 
+    virtual bool leftSmallOperator(Node * cur, Node * other)const override {
+        return cur->data->getId() < other->data->getId();
+    }
+    virtual bool equalOperator(Node * cur, Node * other)const override{
+        return cur->data  == other->data;
+    }
+    virtual bool leftSmallOperator(int tmpKey, Node * other)const override{
+        return tmpKey < other->data->getId();
+    }
+    virtual bool equalOperator(int tmpKey, Node * other) const override{
+        return tmpKey == other->data->getId();
+    }
+
+
+
+    int getKey(Node* cur)const override{
+        return cur->data->getId();
+    }
+public:
+    UsersTreeAbs():AvlTreeNew<User *>(){}
+
+
+    void remove(int UserKey) override{
+        head = removeNode(head, UserKey);
+        size--;
+    }
+
+};
+
+class UsersTree:public UsersTreeAbs{
+    void deleteDatas(Node *cur) {
+        if (cur == NULL)
+            return;
+
+
+        deleteDatas(cur->right);
+        deleteDatas(cur->left);
+        delete cur->data;
+        cur->data = NULL;
+        return;
+    }
+
+    void deleteNode(Node * cur){
+        delete cur->data;
+        cur->right = NULL;
+        cur->left = NULL;
+        delete cur;
+    }
+
+
+public:
+    ~UsersTree(){
+        deleteDatas(head);
+    }
+
+};
 
 
 

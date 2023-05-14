@@ -1,19 +1,25 @@
-// 
+
+
+//
 // 234218 Data Structures 1.
 // Semester: 2023B (spring).
 // Wet Exercise #1.
-// 
+//
 // Recommended TAB size to view this file: 8.
-// 
+//
 // The following main file is necessary to link and run your code.
 // This file is READ ONLY: even if you submit something else, the compiler ..
 // .. WILL use our file.
-// 
+//
+
+
 
 #include "StreamingDBa1.h"
 #include <string>
 #include <iostream>
 #include <fstream>
+
+
 using namespace std;
 
 void print(string cmd, StatusType res);
@@ -22,23 +28,21 @@ void query_get_all_movies(string cmd, streaming_database *obj, Genre genre);
 
 int main()
 {
-	
+
     int d1, d2, d3, g1;
     string b1;
     bool b;
+    //ifstream  cin("C:\\Users\\yakir\\Documents\\TechnionHW\\Matam\\DSWET1FINAL\\example_test0.in");
+    ifstream  cin("/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/example_test1.in");
+
 
     // Init
     streaming_database *obj = new streaming_database();
-	
-    // Execute all commands in file
-	string op;
-    //ifstream cin("C:\\Users\\yakir\\Documents\\Technion HW\\Matam\\HWS\\0507\\example_test0.in");
-    ifstream cin("C:\\Users\\yakir\\Documents\\Technion HW\\Matam\\HWS\\DSWET1NOSHARED\\example_test0.in");
-    ofstream cout("output.txt");
 
+    // Execute all commands in file
+    string op;
     while (cin >> op)
     {
-
         if (!op.compare("add_movie")) {
             cin >> d1 >> g1 >> d2 >> b1;
             if (!b1.compare("True")) {
@@ -112,31 +116,31 @@ int main()
         }
     }
 
-    // Quit 
-	delete obj;
-	return 0;
+    // Quit
+    delete obj;
+    return 0;
 }
 
 // Helpers
 static const char *StatusTypeStr[] =
-{
-   	"SUCCESS",
-	"ALLOCATION_ERROR",
-	"INVALID_INPUT",
-	"FAILURE"
-};
+        {
+                "SUCCESS",
+                "ALLOCATION_ERROR",
+                "INVALID_INPUT",
+                "FAILURE"
+        };
 
-void print(string cmd, StatusType res) 
+void print(string cmd, StatusType res)
 {
-	cout << cmd << ": " << StatusTypeStr[(int) res] << endl;
+    cout << cmd << ": " << StatusTypeStr[(int) res] << endl;
 }
 
 void print(string cmd, output_t<int> res)
 {
     if (res.status() == StatusType::SUCCESS) {
-	    cout << cmd << ": " << StatusTypeStr[(int) res.status()] << ", " << res.ans() << endl;
+        cout << cmd << ": " << StatusTypeStr[(int) res.status()] << ", " << res.ans() << endl;
     } else {
-	    cout << cmd << ": " << StatusTypeStr[(int) res.status()] << endl;
+        cout << cmd << ": " << StatusTypeStr[(int) res.status()] << endl;
     }
 }
 
@@ -150,7 +154,7 @@ void query_get_all_movies(string cmd, streaming_database *obj, Genre genre)
         ++to_alloc;
     }
     // Allocate if okay
-    int *out_mem = NULL;
+    int *out_mem = nullptr;
     if (count.status() == StatusType::SUCCESS)
     {
         out_mem = new int[to_alloc];
@@ -160,10 +164,10 @@ void query_get_all_movies(string cmd, streaming_database *obj, Genre genre)
     StatusType status = obj->get_all_movies(genre, out_mem);
     print(cmd, status);
     if (status == StatusType::SUCCESS) {
-	    for (int i = 0; i < to_alloc; ++i)
+        for (int i = 0; i < to_alloc; ++i)
         {
-		    cout << out_mem[i] << endl;
-	    }
+            cout << out_mem[i] << endl;
+        }
     }
-    //delete[] out_mem;
+    delete[] out_mem;
 }

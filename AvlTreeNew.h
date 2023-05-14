@@ -52,8 +52,6 @@ protected:
         }
         void setLeft(Node* newNode){left = newNode;}
         void setRight(Node* newNode){right = newNode;}
-
-
     };
     Node * head;
     int size;
@@ -128,6 +126,8 @@ protected:
     Node *deleteLeftChild(Node* cur){
         Node* leftChild = cur->left;
         copy(cur, leftChild);
+        leftChild->right = NULL;
+        leftChild->left = NULL;
         delete leftChild;
         leftChild = NULL;
         return cur;
@@ -135,20 +135,19 @@ protected:
     Node *deleteRightChild(Node* cur){
         Node* rightChild = cur->right;
         copy(cur, rightChild);
+        rightChild->right = NULL;
+        rightChild->left = NULL;
         delete rightChild;
         rightChild = NULL;
         return cur;
     }
-    /*
-    virtual bool leftSmallOperator(Node*, Node*)const = 0;
-    virtual bool leftSmallOperator(type, type)const = 0;
-    virtual bool leftSmallOperator( int, type)const = 0;
-    virtual bool equalOperator(Node*, Node*)const = 0;
-    virtual bool equalOperator(type, int)const = 0;
-*/
+    virtual bool leftSmallOperator(Node * cur, Node * other)const =0;
+    virtual bool equalOperator(Node * cur, Node * other)const =0;
+    virtual bool leftSmallOperator(int tmpKey, Node * other)const =0;
+    virtual bool equalOperator(int tmpKey, Node * other)const =0;
 
 public:
-    virtual int getKey(type dat){
+    virtual int getKey(Node* cur)const{
         return 1;
     }
     Node * getHead(){
@@ -157,57 +156,29 @@ public:
     AvlTreeNew():head(NULL),size(0){}
     virtual ~AvlTreeNew() {
         delete head;
+        head = NULL;
+        std::cout<<"";
     }
 
     const int getSize()const{
         return size;
     }
-    /*
-    void putDataInOrderAux(type* datas,Node* cur, int* i){
+
+    Node * find(Node *cur, int tmpKey)
+    {
         if(cur == NULL)
-            return;
-        putDataInOrderAux(datas,cur->left,i);
-        datas[*i] = cur->data;
-        (*i)++;
-        putDataInOrderAux(datas,cur->right,i);
-
-
+            throw NoNodeExist();
+        if(cur->data->getId() == tmpKey)
+            return cur;
+        if(cur->right == NULL && cur->left == NULL)
+            throw NoNodeExist();
+        if(leftSmallOperator(tmpKey, cur))
+            return find(cur->left,tmpKey);
+        else
+            return find(cur->right,tmpKey);
     }
-    void putDataInOrder(type * datas){
-        if(head == NULL || size == 0)
-            throw EmptyTree();
-        int * i =new int(0);
-        putDataInOrderAux(datas,head,i);
-        delete i;
-    }
-*/
+    virtual void deleteNode(Node * cur)=0;
 
-
-
-    void postorder(Node *p, int indent) {
-        if (p != NULL) {
-            if (p->right) {
-                postorder(p->right, indent + 4);
-            }
-            if (indent) {
-                std::cout << std::setw(indent) << ' ';
-            }
-            if (p->right) std::cout << " /\n" << std::setw(indent) << ' ';
-            //std::cout << *(p->data) << "\n ";
-            if (p->left) {
-                std::cout << std::setw(indent) << ' ' << " \\\n";
-                postorder(p->left, indent + 4);
-            }
-        }
-    }
-
-
-
-
-
-
-
-    virtual Node * find(Node* cur,int tmpKey)=0;
 public:
     type getData(int keyToFInd){
         try
@@ -228,8 +199,8 @@ public:
             return false;
         }
     }
-    virtual Node* addNode(Node* cur,Node* newNode)=0;
-    /*{
+    virtual Node* addNode(Node* cur,Node* newNode)
+    {
 
         if(cur == NULL) {
             cur = newNode;
@@ -246,22 +217,33 @@ public:
 
         cur->updateHeight();
         return fixBalance(cur);
-    }*/
+    }
 
-    /*virtual Node* removeNode(Node * cur, int requestedKey){
+
+    void swap(Node* cur , Node*other){
+        type tmpData =cur->data;
+        cur = other;
+        other->data = tmpData;
+        return;
+    }
+
+    virtual Node* removeNode(Node * cur, int requestedKey){
         if(cur == NULL)
             throw NoNodeExist();
 
-        if(equalOperator(cur->data, requestedKey)){//if(ifIs(requestedKey,cur->data)){
+        if(equalOperator( requestedKey, cur)){//if(ifIs(requestedKey,cur->data)){
             if(cur->right == NULL && cur->left == NULL)
             {
                 //delete cur;
+                deleteNode(cur);
+
                 cur = NULL;
                 return cur;
             }
 
             else if (cur->right == NULL && cur->left != NULL)
             {
+
                 cur = deleteLeftChild(cur);
             }
             else if (cur->left == NULL && cur->right != NULL)
@@ -271,14 +253,17 @@ public:
             else if (cur->left != NULL && cur->right != NULL)
             {
                 Node* minOfRight = findLeftest(cur->right);
+                int tmpKey = getKey(cur);
+                type tmpData =cur->data;
                 cur->data = minOfRight->data;
-                cur->setRight( removeNode(cur->right,getKey(cur->data)));
+                minOfRight->data = tmpData;
+                cur->setRight( removeNode(cur->right,requestedKey));
             }
         }
 
         else
         {
-            if(leftSmallOperator(requestedKey, cur->data))//if(ifSmaller(requestedKey,cur->data)) //if (requestedKey < (cur->data->getCmp()))
+            if(leftSmallOperator( requestedKey,cur))//if(ifSmaller(requestedKey,cur->data)) //if (requestedKey < (cur->data->getCmp()))
                 cur->setLeft(removeNode(cur->left, requestedKey));
             else
                 cur->setRight(removeNode(cur->right, requestedKey));
@@ -286,25 +271,29 @@ public:
 
         cur->updateHeight();
         return fixBalance(cur);
-    }*/
+    }
 
-
-//virtual Node* removeNode(Node* cur, int key ) = 0;
-public:
 
 
     virtual void add(type newData) {
-        Node* newNode = new Node(newData);
-        head = addNode(head, newNode);
-        size++;
+        try {
+            Node* newNode = new Node(newData);
+            head = addNode(head, newNode);
+            size++;
+        }
+        catch (std::bad_alloc){
+            throw std::bad_alloc();
+        }
+
     }
-    virtual void remove(int requestedKey)=0;
-    virtual void remove(type requestedKey) = 0;
+    virtual void remove(int requestedKey) {
+        head = removeNode(head, requestedKey);
+        size--;
+    }
+
 
 
 };
-
-
 
 
 

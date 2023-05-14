@@ -24,7 +24,8 @@ streaming_database::~streaming_database()
     delete users;
     delete groups;
 
-	// TODO: Your code goes here
+
+    // TODO: Your code goes here
 }
 
 
@@ -124,9 +125,10 @@ StatusType streaming_database::remove_user(int userId)
         User* user = users->getData(userId);
         if(user->getGroupId() != 0)
         {
-           user->getGroup()->remove(user);
+           user->getGroup()->remove(userId);
            users->remove(userId);
         }
+
     }
 
     catch (std::bad_alloc)
@@ -249,7 +251,11 @@ StatusType streaming_database::user_watch(int userId, int movieId)
     try{
         User* user = users->getData(userId);
         Movie* movie = movies->getData(movieId);
+        moviesSortedByRating->remove(movie);
+        getGenreTree(movie->getGenre())->remove(movie);
         user->watch(movie);
+        moviesSortedByRating->add(movie);
+        getGenreTree(movie->getGenre())->add(movie);
     }
 
     catch (std::bad_alloc)
@@ -265,10 +271,7 @@ StatusType streaming_database::user_watch(int userId, int movieId)
         return StatusType::INVALID_INPUT;
     }
 
-    catch(alreadyExists)
-    {
-        return StatusType::FAILURE;
-    }
+
     catch(NoNodeExist)
     {
         return StatusType::FAILURE;
@@ -284,7 +287,12 @@ StatusType streaming_database::group_watch(int groupId,int movieId)
     try{
         Group * group = groups->getData(groupId);
         Movie* movie = movies->getData(movieId);
+
+        moviesSortedByRating->remove(movie);
+        getGenreTree(movie->getGenre())->remove(movie);
         group->watch(movie);
+        moviesSortedByRating->add(movie);
+        getGenreTree(movie->getGenre())->add(movie);
     }
 
     catch (std::bad_alloc)
@@ -314,7 +322,7 @@ StatusType streaming_database::group_watch(int groupId,int movieId)
 output_t<int> streaming_database::get_all_movies_count(Genre genre)
 {
     try{
-        return getGenreTree(genre)->getSize(), StatusType::SUCCESS;
+        return getGenreTree(genre)->getSize();
     }
 
     catch (std::bad_alloc)
@@ -346,9 +354,6 @@ StatusType streaming_database::get_all_movies(Genre genre, int *const output)
         getGenreTree(genre)->putDataInOrder(output);
 
         // TODO: Your code goes here
-        //output[0] = 4001;
-        // output[1] = 4002;
-        //delete [] movies;
         return StatusType::SUCCESS;
     }
     catch (std::bad_alloc){
@@ -368,7 +373,8 @@ output_t<int> streaming_database::get_num_views(int userId, Genre genre)
 {
     try
     {
-        return users->getData(userId)->getViews(genre), StatusType::SUCCESS;
+        int res =  users->getData(userId)->getViews(genreToInt(genre));
+        return res;
     }
 
 
@@ -398,7 +404,11 @@ StatusType streaming_database::rate_movie(int userId, int movieId, int rating)
     try{
         User * user = users->getData(userId);
         Movie* movie = movies->getData(movieId);
+        moviesSortedByRating->remove(movie);
+        getGenreTree(movie->getGenre())->remove(movie);
         user->rate(movie,rating);
+        moviesSortedByRating->add(movie);
+        getGenreTree(movie->getGenre())->add(movie);
     }
 
 

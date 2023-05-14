@@ -59,6 +59,18 @@ private:
 
     }
 
+    int genreToInt(Genre genre){
+        if(genre == Genre::COMEDY)
+            return 0;
+        if(genre == Genre::DRAMA)
+            return 1;
+        if(genre == Genre::ACTION)
+            return 2;
+        if(genre == Genre::FANTASY)
+            return 3;
+        return 4;
+    }
+
 public:
 	// <DO-NOT-MODIFY> {
 	

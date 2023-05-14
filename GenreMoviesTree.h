@@ -2,53 +2,24 @@
 // Created by yakir on 5/10/2023.
 //
 
-#include "Movie.h"
-#include "AvlTreeNew.h"
+#include "MoviesTree.h"
 
 #ifndef DSWET1NOSHARED_GENREMOVIESTREE_H
 #define DSWET1NOSHARED_GENREMOVIESTREE_H
 
 
-class GenreMoviesTree:public AvlTreeNew<Movie*>{
+class GenreMoviesTree:public MoviesTreeAbs{
 
-/*
-    bool smallOperatorMovie(Movie* cur, Movie* target){
-        return *cur < *target;
+
+
+    virtual bool leftSmallOperator(Node * cur, Node * other)const override {
+        return *(cur->data) < *(other->data);
     }
-
-    bool leftSmallOperator(Node* cur, Node* target)const override{//if(cur < target.
-        return cur->data->getId() < target->data->getId();
-    }
-
-    bool leftSmallOperator(Movie* cur, Movie* target)const override{//if(cur < target.
-        return cur->getId() < target->getId();
+    virtual bool equalOperator(Node * cur, Node * other)const override{
+        return *(cur->data) == *(other->data);
     }
 
-    bool leftSmallOperator( int targetKey,Movie* cur)const override{//if(cur < target.
-        return cur->getId() < targetKey;
-    }
 
-    bool equalOperator(Node* cur, Node* target)const override{
-        return cur->data->getId() == target->data->getId();
-    }
-
-    bool equalOperator(Movie* cur, Movie* target){
-        return cur->getId() == target->getId();
-    }
-    */
-    Node * find(Node *cur, int tmpKey) override
-    {
-        if(cur == NULL)
-            throw NoNodeExist();
-        if(cur->data->getId() == tmpKey)//if(tmpKey == (cur->data->getCmp()))
-            return cur;
-        if(cur->right == NULL && cur->left == NULL)
-            throw NoNodeExist();
-        if(tmpKey < cur->data->getId())        //if(!ifSmaller( cur->data,tmpKey))//if(tmpKey < (cur->data->getCmp()))
-            return find(cur->left,tmpKey);
-        else
-            return find(cur->right,tmpKey);
-    }
     Movie* highestRated;
     Node* removeNode(Node * cur, Movie* movie){
         if(cur == NULL)
@@ -58,6 +29,7 @@ class GenreMoviesTree:public AvlTreeNew<Movie*>{
             if(cur->right == NULL && cur->left == NULL)
             {
                 //delete cur;
+                deleteNode(cur);
                 cur = NULL;
                 return cur;
             }
@@ -73,14 +45,16 @@ class GenreMoviesTree:public AvlTreeNew<Movie*>{
             else if (cur->left != NULL && cur->right != NULL)
             {
                 Node* minOfRight = findLeftest(cur->right);
+                Movie* tmpData =cur->data;
                 cur->data = minOfRight->data;
-                cur->setRight( removeNode(cur->right,cur->data));
+                minOfRight->data = tmpData;
+                cur->setRight( removeNode(cur->right,movie));
             }
         }
 
         else
         {
-            if((*movie) < *(cur->data))//if(ifSmaller(requestedKey,cur->data)) //if (requestedKey < (cur->data->getCmp()))
+            if((*movie) < *(cur->data))
                 cur->setLeft(removeNode(cur->left, movie));
             else
                 cur->setRight(removeNode(cur->right, movie));
@@ -90,40 +64,24 @@ class GenreMoviesTree:public AvlTreeNew<Movie*>{
         return fixBalance(cur);
     }
 
-    Node* addNode(Node* cur,Node* newNode){
-
-        if(cur == NULL) {
-            cur = newNode;
-            return cur;
-        }
-
-        if(*(cur->data) == *(newNode->data))
-            throw alreadyExists();
-
-        if(*(newNode->data) < *(cur->data))
-            cur->setLeft(addNode(cur->left, newNode));
-        else
-            cur->setRight(addNode(cur->right, newNode));
-
-        cur->updateHeight();
-        return fixBalance(cur);
-    }
     void updateHighest(Node* cur){
-        if(cur == NULL) {
-            highestRated = NULL;
-            return;
-        }
         if(cur->right == NULL) {
             highestRated = cur->data;
             return;
         }
         updateHighest(cur->right);
+
     }
 
+    void deleteNode(Node * cur){
+        cur->right = NULL;
+        cur->left = NULL;
+        delete cur;
+    }
 
 public:
 
-    GenreMoviesTree():AvlTreeNew<Movie *>(),highestRated(NULL){}
+    GenreMoviesTree(): MoviesTreeAbs(),highestRated(NULL){}
     Movie* getHighest(){
         return highestRated;
     }
@@ -140,20 +98,22 @@ public:
     }
     void remove(Movie* movie) {
         head = removeNode(head, movie);
-        updateHighest(head);
+        if(head == NULL){
+            highestRated = NULL;
+        }
+        else
+            updateHighest(head);
         size--;
     }
-    void remove(int movie) {
-       size--;
-    }
+
 
     void putDataInOrderAux(int* datas,Node* cur, int* i){
         if(cur == NULL)
             return;
-        putDataInOrderAux(datas,cur->left,i);
+        putDataInOrderAux(datas,cur->right,i);
         datas[*i] = cur->data->getId();
         (*i)++;
-        putDataInOrderAux(datas,cur->right,i);
+        putDataInOrderAux(datas,cur->left,i);
 
 
     }
@@ -164,6 +124,8 @@ public:
         putDataInOrderAux(datas,head,i);
         delete i;
     }
+
+
 };
 
 #endif //DSWET1NOSHARED_GENREMOVIESTREE_H

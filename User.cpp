@@ -35,14 +35,29 @@ int User::genreNum(Genre genre)const{
     return 0;
 }
 
-const int User::getViews(Genre genre)const{
+ int User::getViews(Genre genre)const{
     if(groupViewsTmp != NULL)
         return views[int(genre)] + groupViewsTmp[int(genre)];
     return views[int(genre)];
 }
 
-const int User::getViews(int genre)const{
-    return views[genre];
+int User::getGroupViews(int genre)const{
+    if(groupViewsTmp == NULL)
+        return 0;
+    if(genre == 4)
+    {
+        return  groupViewsTmp[0]+groupViewsTmp[1]+groupViewsTmp[2]+groupViewsTmp[3];
+    }
+    return groupViewsTmp[genre];
+}
+ int User::getViews(int genre)const{
+    if(genre == 4)
+    {
+        return  views[0]+views[1]+views[2]+views[3]+ getGroupViews(genre);
+    }
+
+    return views[genre] + getGroupViews(genre);
+
 }
 
 int User::getGroupId()const{
@@ -74,4 +89,8 @@ void User::updateUserViews() {
     for (int i = 0; i <GENRES_NUM ; ++i) {
         views[i] += groupViewsTmp[i];
     }
+}
+
+bool User::operator==(User *other) const {
+    return this->getId() == other->getId();
 }

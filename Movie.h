@@ -21,6 +21,7 @@ public:
     void updateRating(int rating);
     void updateViews(int viewsNum = 1);
     Genre getGenre()const;
+    virtual ~Movie() = default;
 
 
 };

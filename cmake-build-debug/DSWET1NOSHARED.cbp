@@ -1,103 +1,131 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CodeBlocks_project_file>
-   <FileVersion major="1" minor="6" />
-   <Project>
-      <Option title="DSWET1NOSHARED" />
-      <Option makefile_is_custom="1" />
-      <Option compiler="gcc" />
-      <Option virtualFolders="CMake Files\;" />
-      <Build>
-      <Target title="all">
-         <Option working_dir="/tmp/tmp.qLwMLOyqtK/cmake-build-debug" />
-         <Option type="4" />
-         <MakeCommands>
-            <Build command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 all" />
-            <CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
-            <Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
-            <DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
-         </MakeCommands>
-      </Target>
-      <Target title="DSWET1NOSHARED">
-         <Option output="/tmp/tmp.qLwMLOyqtK/cmake-build-debug/DSWET1NOSHARED" prefix_auto="0" extension_auto="0" />
-         <Option working_dir="/tmp/tmp.qLwMLOyqtK/cmake-build-debug" />
-         <Option object_output="./" />
-         <Option type="1" />
-         <Option compiler="gcc" />
-         <Compiler>
-            <Add directory="/usr/include" />
-            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../include/c++/4.8.5" />
-            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../include/c++/4.8.5/backward" />
-            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../include/c++/4.8.5/x86_64-redhat-linux" />
-            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include" />
-            <Add directory="/usr/local/include" />
-         </Compiler>
-         <MakeCommands>
-            <Build command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 DSWET1NOSHARED" />
-            <CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
-            <Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
-            <DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
-         </MakeCommands>
-      </Target>
-      <Target title="DSWET1NOSHARED/fast">
-         <Option output="/tmp/tmp.qLwMLOyqtK/cmake-build-debug/DSWET1NOSHARED" prefix_auto="0" extension_auto="0" />
-         <Option working_dir="/tmp/tmp.qLwMLOyqtK/cmake-build-debug" />
-         <Option object_output="./" />
-         <Option type="1" />
-         <Option compiler="gcc" />
-         <Compiler>
-            <Add directory="/usr/include" />
-            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../include/c++/4.8.5" />
-            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../include/c++/4.8.5/backward" />
-            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../include/c++/4.8.5/x86_64-redhat-linux" />
-            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include" />
-            <Add directory="/usr/local/include" />
-         </Compiler>
-         <MakeCommands>
-            <Build command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 DSWET1NOSHARED/fast" />
-            <CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
-            <Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
-            <DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
-         </MakeCommands>
-      </Target>
-      <Target title="rebuild_cache">
-         <Option working_dir="/tmp/tmp.qLwMLOyqtK/cmake-build-debug" />
-         <Option type="4" />
-         <MakeCommands>
-            <Build command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache" />
-            <CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
-            <Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
-            <DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.qLwMLOyqtK/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
-         </MakeCommands>
-      </Target>
-      </Build>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/DbObj.cpp">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/Movie.cpp">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/StreamingDBa1.cpp">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/User.cpp">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/main.cpp">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/AvlTreeNew.h">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/DbObj.h">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/GenreMoviesTree.h">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/Group.h">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/Movie.h">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/MoviesTree.h">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/StreamingDBa1.h">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/User.h">
-      </Unit>
-      <Unit filename="/tmp/tmp.qLwMLOyqtK/CMakeLists.txt">
-          <Option virtualFolder="CMake Files\" />
-      </Unit>
-   </Project>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="DSWET1NOSHARED"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DSWET1NOSHARED">
+				<Option output="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/DSWET1NOSHARED" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 DSWET1NOSHARED"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DSWET1NOSHARED/fast">
+				<Option output="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/DSWET1NOSHARED" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 DSWET1NOSHARED/fast"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/AvlTreeNew.h">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/DbObj.cpp">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/DbObj.h">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/GenreMoviesTree.h">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/Group.h">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/Movie.cpp">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/Movie.h">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/MoviesTree.h">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/StreamingDBa1.cpp">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/StreamingDBa1.h">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/User.cpp">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/User.h">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/main.cpp">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/maina1.cpp">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
 </CodeBlocks_project_file>
