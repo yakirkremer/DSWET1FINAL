@@ -97,6 +97,9 @@
 		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/Group.h">
 			<Option target="DSWET1NOSHARED"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/GroupsTree.h">
+			<Option target="DSWET1NOSHARED"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/Movie.cpp">
 			<Option target="DSWET1NOSHARED"/>
 		</Unit>

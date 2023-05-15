@@ -20,7 +20,7 @@ class NoNodeExist:public std::exception{};
 class alreadyExists:public std::exception{};
 class EmptyTree:public std::exception{};
 
-template <class type>
+template <class type, class key>
 class AvlTreeNew{
 protected:
     struct Node{
@@ -32,16 +32,14 @@ protected:
         virtual ~Node(){
             delete right;
             delete left;
-            //delete data;
         }
+        Node(type data):data(data), right(NULL), left(NULL), height(0) {}
+
         int max(int a, int b){
             if(a>b)
                 return a;
             return b;
         }
-
-        Node(type data):data(data), right(NULL), left(NULL), height(0) {}
-
         void updateHeight(){
             int rHeight = -1, lHeight = -1;
             if(right != NULL)
@@ -56,9 +54,7 @@ protected:
     Node * head;
     int size;
 
-    int getHeight(Node * cur){
-        return cur->height;
-    }
+    virtual  const key& getKey(Node * cur)const = 0;
     int getBf(Node* cur){
         int RH = -1, LH = -1;
 
@@ -141,38 +137,32 @@ protected:
         rightChild = NULL;
         return cur;
     }
-    virtual bool leftSmallOperator(Node * cur, Node * other)const =0;
-    virtual bool equalOperator(Node * cur, Node * other)const =0;
-    virtual bool leftSmallOperator(int tmpKey, Node * other)const =0;
-    virtual bool equalOperator(int tmpKey, Node * other)const =0;
+
 
 public:
-    virtual int getKey(Node* cur)const{
-        return 1;
+    AvlTreeNew():head(NULL),size(0){}
+    virtual ~AvlTreeNew() {
+        delete head;
     }
     Node * getHead(){
         return head;
     }
-    AvlTreeNew():head(NULL),size(0){}
-    virtual ~AvlTreeNew() {
-        delete head;
-        head = NULL;
-        std::cout<<"";
-    }
-
     const int getSize()const{
         return size;
     }
-
-    Node * find(Node *cur, int tmpKey)
+    Node * find(Node *cur, const key& tmpKey)
     {
         if(cur == NULL)
             throw NoNodeExist();
-        if(cur->data->getId() == tmpKey)
+       // if(cur->data->getId() == tmpKey)
+       const key& cur1 = getKey(cur);
+       const key&cur2 = tmpKey;
+       if(getKey(cur) == tmpKey)
             return cur;
         if(cur->right == NULL && cur->left == NULL)
             throw NoNodeExist();
-        if(leftSmallOperator(tmpKey, cur))
+        //if(leftSmallOperator(tmpKey, cur))
+        if(tmpKey < getKey(cur))
             return find(cur->left,tmpKey);
         else
             return find(cur->right,tmpKey);
@@ -191,14 +181,6 @@ public:
             throw NoNodeExist();
         }
     }
-    virtual bool nodeExist(int tmpyKey){
-        try{
-            find(head,tmpyKey);
-        }
-        catch (...){
-            return false;
-        }
-    }
     virtual Node* addNode(Node* cur,Node* newNode)
     {
 
@@ -207,10 +189,13 @@ public:
             return cur;
         }
 
-        if(equalOperator(cur, newNode))
+        //if(equalOperator(cur, newNode))
+
+        if(getKey(cur)== getKey(newNode))
             throw alreadyExists();
 
-        if(leftSmallOperator(newNode, cur))
+        //if(leftSmallOperator(newNode, cur))
+        if(getKey(newNode) < getKey(cur))
             cur->setLeft(addNode(cur->left, newNode));
         else
             cur->setRight(addNode(cur->right, newNode));
@@ -218,25 +203,15 @@ public:
         cur->updateHeight();
         return fixBalance(cur);
     }
-
-
-    void swap(Node* cur , Node*other){
-        type tmpData =cur->data;
-        cur = other;
-        other->data = tmpData;
-        return;
-    }
-
-    virtual Node* removeNode(Node * cur, int requestedKey){
+    virtual Node* removeNode(Node * cur, const key& requestedKey){
         if(cur == NULL)
             throw NoNodeExist();
 
-        if(equalOperator( requestedKey, cur)){//if(ifIs(requestedKey,cur->data)){
+       // if(equalOperator( requestedKey, cur)){//if(ifIs(requestedKey,cur->data)){
+       if(requestedKey == getKey(cur)){
             if(cur->right == NULL && cur->left == NULL)
             {
-                //delete cur;
                 deleteNode(cur);
-
                 cur = NULL;
                 return cur;
             }
@@ -253,7 +228,7 @@ public:
             else if (cur->left != NULL && cur->right != NULL)
             {
                 Node* minOfRight = findLeftest(cur->right);
-                int tmpKey = getKey(cur);
+                key tmpKey = getKey(cur);
                 type tmpData =cur->data;
                 cur->data = minOfRight->data;
                 minOfRight->data = tmpData;
@@ -263,7 +238,8 @@ public:
 
         else
         {
-            if(leftSmallOperator( requestedKey,cur))//if(ifSmaller(requestedKey,cur->data)) //if (requestedKey < (cur->data->getCmp()))
+            //if(leftSmallOperator( requestedKey,cur))//if(ifSmaller(requestedKey,cur->data)) //if (requestedKey < (cur->data->getCmp()))
+            if(requestedKey < getKey(cur))
                 cur->setLeft(removeNode(cur->left, requestedKey));
             else
                 cur->setRight(removeNode(cur->right, requestedKey));
@@ -272,9 +248,6 @@ public:
         cur->updateHeight();
         return fixBalance(cur);
     }
-
-
-
     virtual void add(type newData) {
         try {
             Node* newNode = new Node(newData);
@@ -286,13 +259,10 @@ public:
         }
 
     }
-    virtual void remove(int requestedKey) {
+    virtual void remove(const key& requestedKey) {
         head = removeNode(head, requestedKey);
         size--;
     }
-
-
-
 };
 
 

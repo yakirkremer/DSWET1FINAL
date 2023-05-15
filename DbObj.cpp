@@ -9,7 +9,7 @@ DbObj::DbObj(int id, bool vip) : Id(id),isVip(vip) {
         throw NotValidId();
 }
 
-int DbObj::getId() const {
+const int& DbObj::getId() const {
     return Id;
 }
 

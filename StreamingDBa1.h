@@ -18,7 +18,7 @@
 #include "wet1util.h"
 #include "MoviesTree.h"
 #include "GenreMoviesTree.h"
-#include "Group.h"
+#include "GroupsTree.h"
 
 class streaming_database {
 private:
@@ -69,6 +69,19 @@ private:
         if(genre == Genre::FANTASY)
             return 3;
         return 4;
+    }
+    void check_input( int Id1,int Id2,int rating) {
+        if ( rating <0 ||rating >100 || Id1 <=0 || Id2 <= 0)
+            throw NotValidId();
+    }
+
+    void check_input(int Id) {
+        if (Id <= 0 )
+            throw NotValidId();
+    }
+    void check_input(int Id, Genre genre, int views) {
+        if (Id <= 0 || genre == Genre::NONE || views < 0)
+            throw NotValidInput();
     }
 
 public:

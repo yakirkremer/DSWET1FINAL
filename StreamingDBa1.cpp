@@ -64,6 +64,7 @@ StatusType streaming_database::remove_movie(int movieId)
         moviesSortedByRating->remove(movie);
         getGenreTree(movie)->remove(movie);
         movies->remove(movieId);
+        delete movie;
 
     }
 
@@ -126,8 +127,10 @@ StatusType streaming_database::remove_user(int userId)
         if(user->getGroupId() != 0)
         {
            user->getGroup()->remove(userId);
-           users->remove(userId);
         }
+        users->remove(userId);
+        delete user;
+
 
     }
 
@@ -184,8 +187,10 @@ StatusType streaming_database::remove_group(int groupId)
 {
     try{
         Group* group = groups->getData(groupId);
+        group->updateViews();
         group->clearGroup(group->getHead());
         groups->remove(groupId);
+        delete group;
     }
 
     catch (std::bad_alloc)

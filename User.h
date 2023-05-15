@@ -15,10 +15,10 @@ class User: public DbObj{
 
     int* views;
     int groupId;
-    AvlTreeNew<User*>* group;
+    AvlTreeNew<User*, int>* group;
 
 public:
-    AvlTreeNew<User*>* getGroup() {
+    AvlTreeNew<User*, int>* getGroup() {
         return group;
     }
 
@@ -27,6 +27,7 @@ public:
     User(int Id, bool vip);
     virtual ~User(){
         delete[] views;
+        views = NULL;
     }
         int genreNum(Genre genre)const;
 
@@ -36,7 +37,7 @@ public:
      int getViews(int genre)const;
 
     int getGroupId()const;
-    void setGroupId(int group, AvlTreeNew<User*>* Newgroup);
+    void setGroupId(int group, AvlTreeNew<User*, int>* Newgroup);
     void watch(Movie* movie);
     void rate(Movie* movie, int);
     void updateUserViews();
@@ -44,65 +45,7 @@ public:
 };
 
 
-class UsersTreeAbs:public AvlTreeNew<User*> {
-protected:
 
-    virtual bool leftSmallOperator(Node * cur, Node * other)const override {
-        return cur->data->getId() < other->data->getId();
-    }
-    virtual bool equalOperator(Node * cur, Node * other)const override{
-        return cur->data  == other->data;
-    }
-    virtual bool leftSmallOperator(int tmpKey, Node * other)const override{
-        return tmpKey < other->data->getId();
-    }
-    virtual bool equalOperator(int tmpKey, Node * other) const override{
-        return tmpKey == other->data->getId();
-    }
-
-
-
-    int getKey(Node* cur)const override{
-        return cur->data->getId();
-    }
-public:
-    UsersTreeAbs():AvlTreeNew<User *>(){}
-
-
-    void remove(int UserKey) override{
-        head = removeNode(head, UserKey);
-        size--;
-    }
-
-};
-
-class UsersTree:public UsersTreeAbs{
-    void deleteDatas(Node *cur) {
-        if (cur == NULL)
-            return;
-
-
-        deleteDatas(cur->right);
-        deleteDatas(cur->left);
-        delete cur->data;
-        cur->data = NULL;
-        return;
-    }
-
-    void deleteNode(Node * cur){
-        delete cur->data;
-        cur->right = NULL;
-        cur->left = NULL;
-        delete cur;
-    }
-
-
-public:
-    ~UsersTree(){
-        deleteDatas(head);
-    }
-
-};
 
 
 

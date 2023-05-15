@@ -33,7 +33,7 @@ int main()
     string b1;
     bool b;
     //ifstream  cin("C:\\Users\\yakir\\Documents\\TechnionHW\\Matam\\DSWET1FINAL\\example_test0.in");
-    ifstream  cin("/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/example_test1.in");
+    ifstream  cin("/mnt/c/Users/yakir/Documents/TechnionHW/Matam/DSWET1FINAL/example_test0.in");
 
 
     // Init

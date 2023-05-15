@@ -5,9 +5,14 @@
 
 
 #include "Movie.h"
-Movie::Movie(int Id, bool vip, int views, Genre genre): DbObj(Id,vip),views(views),rating(0), rates(0),genre(genre) {
+
+
+
+Movie::Movie(int Id, bool vip, int views, Genre genre): DbObj(Id,vip),views(views),rating(0), rates(0),genre(genre),
+                                                        key(MovieKey(0,views,Id)) {
     if(genre == Genre::NONE)
     {
+
         throw NotValidInput();
     }
 }
@@ -27,14 +32,15 @@ void Movie::updateRating(int newRate) {
     int sumRating = rating * rates;
     sumRating += newRate;
     rates++;
-    rating = sumRating/rates;
+    //rating = sumRating/rates;
+    key.rating = sumRating/rates;
 }
 
 void Movie::updateViews(int viewsNum) {
-    views+= viewsNum;
+    //views+= viewsNum;
+    key.views += viewsNum;
 }
 
 Genre Movie::getGenre() const {
     return genre;
 }
-

@@ -10,34 +10,17 @@
 
 
 
-class MoviesTreeAbs:public AvlTreeNew<Movie*>{
 
-    int getKey(Node* cur)const override{
+class MoviesTree:public AvlTreeNew<Movie*, int>{
+    const int& getKey(Node* cur)const override{
         return cur->data->getId();
     }
-
-    virtual bool leftSmallOperator(Node * cur, Node * other)const override {
-        return cur->data->getId() < other->data->getId();
-    }
-    virtual bool equalOperator(Node * cur, Node * other)const override{
-        return cur->data->getId()  == other->data->getId();
-    }
-    virtual bool leftSmallOperator(int tmpKey, Node * other)const override{
-        return tmpKey < other->data->getId();
-    }
-    virtual bool equalOperator(int tmpKey, Node * other) const override{
-        return tmpKey == other->data->getId();
-    }
-
     void deleteNode(Node * cur){
         cur->right = NULL;
         cur->left = NULL;
+        //delete cur->data;
         delete cur;
     }
-};
-
-class MoviesTree:public MoviesTreeAbs{
-
 public:
     virtual~ MoviesTree(){
         deleteDatas(head);

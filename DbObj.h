@@ -19,7 +19,7 @@ bool isVip;
 
 public:
     DbObj(int,bool);
-    int getId()const;
+    const int& getId()const;
     bool Vip()const;
 };
 

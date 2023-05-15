@@ -63,7 +63,7 @@ int User::getGroupViews(int genre)const{
 int User::getGroupId()const{
     return groupId;
 }
-void User::setGroupId(int NewgroupId, AvlTreeNew<User*>* Newgroup){
+void User::setGroupId(int NewgroupId, AvlTreeNew<User*,int>* Newgroup){
     groupId = NewgroupId;
     group = Newgroup;
 }
