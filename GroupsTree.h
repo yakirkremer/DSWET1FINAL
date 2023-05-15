@@ -9,8 +9,7 @@
 
 class GroupsTree: public AvlTreeNew<Group*,int>{
     const int& getKey(Node* cur)const override{
-        if(cur == NULL)
-            return  NULL;
+
         return cur->data->getId();
     }
 

@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++11 -DNDEBUG -Wall -g CMakeFiles/DSWET1NOSHARED.dir/main.cpp.o CMakeFiles/DSWET1NOSHARED.dir/DbObj.cpp.o CMakeFiles/DSWET1NOSHARED.dir/Movie.cpp.o CMakeFiles/DSWET1NOSHARED.dir/User.cpp.o CMakeFiles/DSWET1NOSHARED.dir/StreamingDBa1.cpp.o CMakeFiles/DSWET1NOSHARED.dir/maina1.cpp.o -o DSWET1NOSHARED 

@@ -8,8 +8,6 @@
 class UsersTreeAbs:public AvlTreeNew<User*,int> {
 protected:
     const int& getKey(Node* cur)const override{
-        if(cur == NULL)
-            return NULL;
         return cur->data->getId();
     }
 public:
